@@ -1,0 +1,42 @@
+CREATE TABLE transaction_table (
+  transaction_id SERIAL NOT NULL
+  ,product_id SERIAL NOT NULL
+  ,customer_id SERIAL PRIMARY KEY
+  ,transaction_date date DEFAULT NULL	
+  ,online_order text DEFAULT NULL
+  ,order_status text DEFAULT NULL
+  ,list_price numeric DEFAULT NULL
+  ,standard_cost numeric DEFAULT NULL
+)
+
+CREATE Table customers (
+  customer_id SERIAL PRIMARY KEY REFERENCES transaction_table (customer_id) NOT NULL
+  ,first_name text DEFAULT NULL
+  ,last_name text DEFAULT NULL
+  ,gender text DEFAULT NULL
+  ,DOB date DEFAULT NULL
+  ,job_title text DEFAULT NULL
+  ,job_industry_category text DEFAULT NULL
+  ,wealth_segment text DEFAULT NULL
+  ,deceased_indicator text DEFAULT NULL
+  ,owns_car text DEFAULT NULL
+  ,property_valuation integer DEFAULT NULL
+)
+
+
+CREATE Table product (
+product_id SERIAL PRIMARY KEY REFERENCES transaction_table (product_id) NOT NULL
+,brand text	DEFAULT NULL	
+,product_line text DEFAULT NULL	
+,product_class text	DEFAULT NULL	
+,product_size text DEFAULT NULL 
+)
+
+CREATE Table IF NOT EXISTS place (
+   customer_id SERIAL PRIMARY KEY REFERENCES transaction_table (customer_id) NOT NULL
+  ,address text DEFAULT NULL
+  ,postcode integer DEFAULT NULL
+  ,state text DEFAULT NULL
+  ,country text DEFAULT NULL
+)
+ 
